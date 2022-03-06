@@ -44,9 +44,6 @@ result.plot(x = 'timestamp', y = ['High','Low'], kind = 'scatter')
 plt.savefig("plots/time_vs_highlow.png")
 """
 
-result.plot(x = 'VWAP', y = 'Open', kind = 'scatter')
-plt.savefig("plots/vwap_vs_open.png")
-
 result.plot(x = 'Volume', y = 'VWAP', kind = 'scatter')
 plt.savefig("plots/volume_vs_vwap.png")
 
