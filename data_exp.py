@@ -13,10 +13,12 @@ etherium_files = [
                     "Etherium Dataset/full_data__6__2021.csv",
                  ]
 result = pd.concat([pd.read_csv(f) for f in etherium_files], ignore_index=True)
+print(result.isnull().sum())
 result.info()
 print("\n")
 pd.set_option('display.float_format', lambda x: '%.1f' % x)
 print(result.describe())
+"""
 print("\nMedian:")
 print(result.median())
 print("\nRange:")
@@ -38,19 +40,20 @@ print(result.corr(method='pearson'))
 
 result.plot(x = 'timestamp', y = 'Open', kind = 'scatter')
 plt.savefig("plots/time_vs_open.png")
+"""
 
+result.boxplot(column='Open')
+plt.savefig("plots/open_boxplot.png")
 """
 result.plot(x = 'timestamp', y = ['High','Low'], kind = 'scatter')
 plt.savefig("plots/time_vs_highlow.png")
-"""
 
 result.plot(x = 'Volume', y = 'VWAP', kind = 'scatter')
 plt.savefig("plots/volume_vs_vwap.png")
 
-result.plot(x = 'Target', y = 'Open', kind = 'scatter')
-plt.savefig("plots/target_vs_open.png")
+result.plot(x = 'Close', y = 'Open', kind = 'scatter')
+plt.savefig("plots/close_vs_open.png")
 
-"""
 print("\nChi Square Test (Open, Close):")
 table = pd.crosstab(result["High"], result["Low"])
 chi2_test, p, dof, expected = sp.chi2_contingency(table)
